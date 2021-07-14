@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  MusicLinkTest
 //
-//  Created by Dhruv Weaver on 7/13/21.
+//  Created by Dhruv Weaver, Grant Kilgard on 7/13/21.
 //
 
 import UIKit
