@@ -21,9 +21,9 @@ class ViewController: UIViewController {
 
     @IBAction func translateButtonPressed(_ sender: Any) {
         if let input = inputTextField.text {
-            link.linkIn = input
+            link.link = input
         } else {
-            link.linkIn = ""
+            link.link = ""
         }
         link.translateLink()
         outputTextField.text = link.linkOut
