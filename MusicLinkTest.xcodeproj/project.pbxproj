@@ -14,7 +14,6 @@
 		00F20134269DF55300DC9785 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F20132269DF55300DC9785 /* Main.storyboard */; };
 		00F20136269DF55300DC9785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F20135269DF55300DC9785 /* Assets.xcassets */; };
 		00F20139269DF55300DC9785 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F20137269DF55300DC9785 /* LaunchScreen.storyboard */; };
-		00F20141269DF6A200DC9785 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F20140269DF6A200DC9785 /* Link.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		00F20135269DF55300DC9785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00F20138269DF55300DC9785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00F2013A269DF55300DC9785 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00F20140269DF6A200DC9785 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +61,6 @@
 				00F2012C269DF55300DC9785 /* AppDelegate.swift */,
 				00F2012E269DF55300DC9785 /* SceneDelegate.swift */,
 				00F20130269DF55300DC9785 /* ViewController.swift */,
-				00F20140269DF6A200DC9785 /* Link.swift */,
 				007310B026AB696E005D4D61 /* Song.swift */,
 				00F20132269DF55300DC9785 /* Main.storyboard */,
 				00F20135269DF55300DC9785 /* Assets.xcassets */,
@@ -146,7 +143,6 @@
 				00F20131269DF55300DC9785 /* ViewController.swift in Sources */,
 				00F2012D269DF55300DC9785 /* AppDelegate.swift in Sources */,
 				00F2012F269DF55300DC9785 /* SceneDelegate.swift in Sources */,
-				00F20141269DF6A200DC9785 /* Link.swift in Sources */,
 				007310B126AB696E005D4D61 /* Song.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
