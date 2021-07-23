@@ -1,25 +1,45 @@
 //
-//  Link.swift
+//  Song.swift
 //  MusicLinkTest
 //
-//  Created by Dhruv Weaver on 7/13/21.
+//  Created by Dhruv Weaver on 7/23/21.
 //
 
 import Foundation
 
-class Link {
+class Song {
     var link: String
-    var data: String? = nil {
-        didSet {
-            print(data!)
-        }
+    var json: JSONData? = nil
+    
+    struct JSONData: Decodable {
+        let linksByPlatform: Links
+    }
+    
+    struct Links: Decodable {
+        let amazonMusic: MusicURL
+        let amazonStore: MusicURL
+        let deezer: MusicURL
+        let appleMusic: MusicURL
+        let itunes: MusicURL
+        let napster: MusicURL
+        let pandora: MusicURL
+        let soundcloud: MusicURL
+        let spotify: MusicURL
+        let tidal: MusicURL
+        let yandex: MusicURL
+        let youtube: MusicURL
+        let youtubeMusic: MusicURL
+    }
+    
+    struct MusicURL: Decodable {
+        let url: String
     }
     
     init(link: String) {
         self.link = link
     }
     
-    private func getSongData(link: String, completion: @escaping (String) -> Void) {
+    private func getSongData(link: String, completion: @escaping (Data) -> Void) {
         let encodedLink = link.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         if let encodedLink = encodedLink {
             guard let url = URL(string: "https://api.song.link/v1-alpha.1/links?url=\(encodedLink)") else {
@@ -43,10 +63,8 @@ class Link {
                 }
                 
                 if let data = data {
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        DispatchQueue.main.async {
-                            completion(jsonString)
-                        }
+                    DispatchQueue.main.async {
+                        completion(data)
                     }
                 }
             }
@@ -56,12 +74,15 @@ class Link {
         }
     }
     
-    func getData(completion: @escaping (String) -> Void) {
+    func getData(completion: @escaping (JSONData) -> Void) {
         getSongData(link: link) { data in
             DispatchQueue.main.async {
-                self.data = data
-                completion(data)
+                if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
+                    self.json = json
+                    completion(json)
+                }
             }
         }
     }
 }
+
