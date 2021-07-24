@@ -21,6 +21,10 @@ class ViewController: UIViewController {
         loadingIndicator.hidesWhenStopped = true
     }
     // Sample link: https://music.youtube.com/watch?v=r2CaT3stL7U&feature=share
+    @IBAction func clearInputButtonPressed(_ sender: Any) {
+        inputTextField.text = ""
+    }
+    
     @IBAction func translateButtonPressed(_ sender: Any) {
         if let input = inputTextField.text {
             song.link = input

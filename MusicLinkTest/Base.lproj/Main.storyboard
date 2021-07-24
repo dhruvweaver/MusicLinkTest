@@ -26,14 +26,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link input" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZg-B1-f9s">
-                                <rect key="frame" x="20" y="115" width="350" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify link output:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrH-Un-bYY">
-                                <rect key="frame" x="20" y="221" width="350" height="21"/>
+                                <rect key="frame" x="20" y="221.66666666666666" width="350" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,6 +42,24 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-7y-Ed9">
                                 <rect key="frame" x="350" y="222" width="20" height="20"/>
                             </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="nfo-0T-7dJ">
+                                <rect key="frame" x="20" y="106" width="350" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link input" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZg-B1-f9s">
+                                        <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGh-ir-dOp">
+                                        <rect key="frame" x="314" y="0.0" width="36" height="30"/>
+                                        <state key="normal" title="Clear"/>
+                                        <connections>
+                                            <action selector="clearInputButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8f1-zv-UtQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,20 +68,20 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uUW-Ez-Ybj" secondAttribute="trailing" constant="20" id="1SQ-58-mnB"/>
                             <constraint firstItem="sFm-n5-0h1" firstAttribute="top" secondItem="uUW-Ez-Ybj" secondAttribute="bottom" constant="72" id="7CS-qN-QoJ"/>
                             <constraint firstItem="uUW-Ez-Ybj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="7PJ-SQ-Bkn"/>
+                            <constraint firstItem="uUW-Ez-Ybj" firstAttribute="top" secondItem="nfo-0T-7dJ" secondAttribute="bottom" constant="8" symbolic="YES" id="8ly-Jh-Scl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hrH-Un-bYY" secondAttribute="trailing" constant="20" id="Cez-CI-apf"/>
                             <constraint firstItem="sFm-n5-0h1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GWR-vv-Kt7"/>
                             <constraint firstItem="hrH-Un-bYY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LyO-Zt-Uwp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GZg-B1-f9s" secondAttribute="trailing" constant="20" id="MrN-iC-9lr"/>
                             <constraint firstItem="XAB-cF-3LC" firstAttribute="top" secondItem="sFm-n5-0h1" secondAttribute="bottom" constant="20" id="ORU-e5-Gzm"/>
                             <constraint firstItem="uUW-Ez-Ybj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S6P-bJ-Sgr"/>
-                            <constraint firstItem="uUW-Ez-Ybj" firstAttribute="top" secondItem="GZg-B1-f9s" secondAttribute="bottom" constant="8" symbolic="YES" id="TNo-rb-D0u"/>
                             <constraint firstItem="sFm-n5-0h1" firstAttribute="top" secondItem="hrH-Un-bYY" secondAttribute="bottom" constant="8" symbolic="YES" id="V5t-xF-hdx"/>
                             <constraint firstItem="sFm-n5-0h1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YOW-9p-1mx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sFm-n5-0h1" secondAttribute="trailing" constant="20" id="ZSM-WE-O0x"/>
-                            <constraint firstItem="GZg-B1-f9s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iAN-Dk-L6v"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nfo-0T-7dJ" secondAttribute="trailing" constant="20" id="lZW-XB-twD"/>
                             <constraint firstItem="uUW-Ez-Ybj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nlP-BC-Xaf"/>
                             <constraint firstItem="XAB-cF-3LC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="swL-lw-3D5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qkp-7y-Ed9" secondAttribute="trailing" constant="20" id="tMi-as-HKH"/>
+                            <constraint firstItem="nfo-0T-7dJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tYp-NK-XYL"/>
                         </constraints>
                     </view>
                     <connections>
