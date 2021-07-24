@@ -45,10 +45,14 @@
                                     <action selector="translateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OCb-JU-9Dy"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-7y-Ed9">
+                                <rect key="frame" x="350" y="222" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="sFm-n5-0h1" firstAttribute="top" secondItem="qkp-7y-Ed9" secondAttribute="bottom" constant="8" symbolic="YES" id="0vy-BA-5ON"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uUW-Ez-Ybj" secondAttribute="trailing" constant="20" id="1SQ-58-mnB"/>
                             <constraint firstItem="sFm-n5-0h1" firstAttribute="top" secondItem="uUW-Ez-Ybj" secondAttribute="bottom" constant="72" id="7CS-qN-QoJ"/>
                             <constraint firstItem="uUW-Ez-Ybj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="7PJ-SQ-Bkn"/>
@@ -65,10 +69,12 @@
                             <constraint firstItem="GZg-B1-f9s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iAN-Dk-L6v"/>
                             <constraint firstItem="uUW-Ez-Ybj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nlP-BC-Xaf"/>
                             <constraint firstItem="XAB-cF-3LC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="swL-lw-3D5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qkp-7y-Ed9" secondAttribute="trailing" constant="20" id="tMi-as-HKH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="inputTextField" destination="uUW-Ez-Ybj" id="pal-h9-ukd"/>
+                        <outlet property="loadingIndicator" destination="qkp-7y-Ed9" id="7ef-mW-eee"/>
                         <outlet property="outputTextField" destination="sFm-n5-0h1" id="ULF-1X-VxG"/>
                     </connections>
                 </viewController>
