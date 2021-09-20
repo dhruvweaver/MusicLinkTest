@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         loadingIndicator.hidesWhenStopped = true
     }
-    // Sample link: https://music.youtube.com/watch?v=r2CaT3stL7U&feature=share
+    
     @IBAction func clearInputButtonPressed(_ sender: Any) {
         inputTextField.text = ""
     }
@@ -32,11 +32,10 @@ class ViewController: UIViewController {
             song.link = ""
         }
         
-//        loadingIndicator.isHidden = false
         loadingIndicator.startAnimating()
-        song.getData { json in
+        song.setJSONData { json in
             DispatchQueue.main.async {
-                self.outputTextField.text = json.linksByPlatform.spotify.url
+                self.outputTextField.text = json.linksByPlatform.youtubeMusic.url
                 self.loadingIndicator.stopAnimating()
             }
         }
