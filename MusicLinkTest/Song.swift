@@ -10,6 +10,7 @@ import Foundation
 class Song {
     var link: String
     var json: JSONData? = nil
+    var dataIsSet: Bool = false
     
     // structure for decoding JSON tree
     struct JSONData: Decodable {
@@ -30,6 +31,18 @@ class Song {
         let yandex: MusicURL
         let youtube: MusicURL
         let youtubeMusic: MusicURL
+        
+        func valueByPropertyName(name: String) -> MusicURL {
+            switch name {
+            case "spotify":
+                return spotify
+            case "youtubeMusic":
+                return youtubeMusic
+            case "appleMusic":
+                return appleMusic
+            default: fatalError("Wrong property name")
+            }
+        }
     }
     
     struct MusicURL: Decodable {
@@ -40,13 +53,29 @@ class Song {
         self.link = link
     }
     
-    private func getJSONData() async throws {
+    enum Platform: String {
+        case spotify = "Spotify", youtubeMusic = "YouTube Music", appleMusic = "Apple Music"
+        
+        var propertyName: String {
+            switch self {
+            case .spotify:
+                return "spotify"
+            case .youtubeMusic:
+                return "youtubeMusic"
+            case .appleMusic:
+                return "appleMusic"
+            }
+        }
+    }
+    
+    private func setJSONData() async throws {
         if let data = try await getData(link: link) {
             if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
                 print("assigned json data")
                 print(json.linksByPlatform.spotify.url)
                 print(json)
                 self.json = json
+                self.dataIsSet = true
             } else {
                 print("could not assign json data")
             }
@@ -93,9 +122,13 @@ class Song {
      */
     func getLink(platform: String) async throws -> String? {
         var linkOut: String? = nil
-        try await getJSONData()
+        let platformEnum = Platform(rawValue: platform)!
+        if (!self.dataIsSet) {
+            try await setJSONData()
+        }
         if let processedJSON = json {
-            linkOut = platform + ": " + processedJSON.linksByPlatform.spotify.url
+            let links = processedJSON.linksByPlatform
+            linkOut = links.valueByPropertyName(name: platformEnum.propertyName).url
         }
         return linkOut
     }

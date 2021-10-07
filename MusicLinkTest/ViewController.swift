@@ -52,6 +52,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         platformPickerView.delegate = self
         
         pickerData = platformPickerValues
+        selectedPlatform = pickerData[0]
         
         // allows user to tap outside of keyboard to dismiss
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -68,6 +69,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func translateButtonPressed(_ sender: Any) {
+        dismissKeyboard()
+        
         if let input = inputTextField.text {
             song.link = input
         } else {
