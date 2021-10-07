@@ -7,11 +7,38 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        selectedPlatform = pickerData[row]
+        platformLabel.text = "\(selectedPlatform) link output:"
+    }
+    
     
     @IBOutlet var inputTextField: UITextField!
+    @IBOutlet var platformPickerView: UIPickerView!
+    @IBOutlet var platformLabel: UILabel!
     @IBOutlet var outputTextField: UITextField!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    var pickerData: [String] = [String]()
+    let platformPickerValues = ["Spotify", "YouTube Music", "Apple Music"]
+    var selectedPlatform: String = String()
     
     var song = Song(link: "")
     
@@ -19,6 +46,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         loadingIndicator.hidesWhenStopped = true
+        
+//        platformPickerView = UIPickerView()
+        platformPickerView.dataSource = self
+        platformPickerView.delegate = self
+        
+        pickerData = platformPickerValues
         
         // allows user to tap outside of keyboard to dismiss
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -43,7 +76,7 @@ class ViewController: UIViewController {
         
         loadingIndicator.startAnimating()
         Task.init {
-            if let link = try await song.getLink() {
+            if let link = try await song.getLink(platform: selectedPlatform) {
                 self.outputTextField.text = link
             } else {
                 self.outputTextField.text = "Error: no link data found"

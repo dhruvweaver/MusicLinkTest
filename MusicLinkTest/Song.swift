@@ -91,11 +91,11 @@ class Song {
     /**
      Sets the json parameter of a Song object to the JSON data gathered from the song.link API and returns a requested link
      */
-    func getLink() async throws -> String? {
+    func getLink(platform: String) async throws -> String? {
         var linkOut: String? = nil
         try await getJSONData()
         if let processedJSON = json {
-            linkOut = processedJSON.linksByPlatform.spotify.url
+            linkOut = platform + ": " + processedJSON.linksByPlatform.spotify.url
         }
         return linkOut
     }
