@@ -57,6 +57,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // allows user to tap outside of keyboard to dismiss
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        // continuously checks text field for changes
+        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @objc func dismissKeyboard() {
@@ -64,14 +67,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         view.endEditing(true)
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        song.setDataIsSetBool(isSet: false)
+    }
+    
     @IBAction func clearInputButtonPressed(_ sender: Any) {
         inputTextField.text = ""
-        song.dataIsSet = false
+        song.setDataIsSetBool(isSet: false)
     }
     
     @IBAction func translateButtonPressed(_ sender: Any) {
         dismissKeyboard()
-        
+        print(song.dataIsSet)
         if let input = inputTextField.text {
             song.link = input
         } else {
@@ -81,6 +88,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         loadingIndicator.startAnimating()
         Task.init {
             if let link = try await song.getLink(platform: selectedPlatform) {
+                print(song.dataIsSet)
                 self.outputTextField.text = link
             } else {
                 self.outputTextField.text = "Error: no link data found"

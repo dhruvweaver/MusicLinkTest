@@ -68,6 +68,10 @@ class Song {
         }
     }
     
+    func setDataIsSetBool(isSet: Bool) {
+        self.dataIsSet = isSet
+    }
+    
     private func setJSONData() async throws {
         if let data = try await getData(link: link) {
             if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
