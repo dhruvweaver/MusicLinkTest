@@ -34,9 +34,8 @@ class ViewController: UIViewController {
         
         loadingIndicator.startAnimating()
         Task.init {
-            try await song.setJSONData()
-            if let json = song.json {
-                self.outputTextField.text = json.linksByPlatform.spotify.url
+            if let link = try await song.getLink() {
+                self.outputTextField.text = link
             } else {
                 self.outputTextField.text = "Error: no link data found"
             }

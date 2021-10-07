@@ -80,18 +80,32 @@ class Song {
         return songData
     }
     
+    struct FailableDecodable<Base : Decodable> : Decodable {
+
+        let base: Base?
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            self.base = try? container.decode(Base.self)
+        }
+    }
+    
     /**
-     Sets the json parameter of a Song object to the JSON data gathered from the song.link API
+     Sets the json parameter of a Song object to the JSON data gathered from the song.link API and returns a requested link
      */
-    func setJSONData() async throws {
+    func getLink() async throws -> String? {
+        var linkOut: String? = nil
         if let data = try await getData(link: link) {
-            if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
-                self.json = json
+            if let json = try? JSONDecoder().decode(FailableDecodable<JSONData>.self, from: data) {
                 print("assigned json data")
+                print(json.base?.linksByPlatform.spotify.url)
+                print(json.base)
+                linkOut = json.base?.linksByPlatform.spotify.url
             } else {
                 print("could not assign json data")
             }
         }
+        return linkOut
     }
 }
 
