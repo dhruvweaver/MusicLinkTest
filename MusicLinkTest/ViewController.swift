@@ -33,12 +33,16 @@ class ViewController: UIViewController {
         }
         
         loadingIndicator.startAnimating()
-        song.setJSONData { json in
-            DispatchQueue.main.async {
-                self.outputTextField.text = json.linksByPlatform.youtubeMusic.url
-                self.loadingIndicator.stopAnimating()
+        Task.init {
+            try await song.setJSONData()
+            if let json = song.json {
+                self.outputTextField.text = json.linksByPlatform.spotify.url
+            } else {
+                self.outputTextField.text = "Error: no link data found"
             }
+            self.loadingIndicator.stopAnimating()
         }
+        
     }
     
 }

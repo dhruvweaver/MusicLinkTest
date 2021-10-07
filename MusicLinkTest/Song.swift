@@ -40,59 +40,56 @@ class Song {
         self.link = link
     }
     
+    func getJSONData() {
+        
+    }
+    
     /**
      Uses completion handler to get data from API.
      - Parameter link: Link to be encoded and used for GET request
-     - Parameter completion: Closure takes data object and assigns request data to it
      */
-    private func getData(link: String, completion: @escaping (Data) -> Void) {
+    private func getData(link: String) async throws -> Data? {
         // encode link
         let encodedLink = link.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let songData: Data?
         if let encodedLink = encodedLink {
             guard let url = URL(string: "https://api.song.link/v1-alpha.1/links?url=\(encodedLink)") else {
-                return
+                return nil
             }
-            print(try! String(contentsOf: url))
+//            print(try! String(contentsOf: url))
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             
-            // URLSession task to call closure
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard error == nil else {
-                    print("Error: error calling GET")
-                    print(error!)
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                    print("Error: HTTP request failed")
-                    return
-                }
-                
-                if let data = data {
-                    DispatchQueue.main.async {
-                        completion(data)
-                    }
-                }
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            // need to write proper errors using throw
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("Error: could not get response")
+                return nil
             }
             
-            task.resume()
+            songData = data
+            print("assigned data")
+        } else {
+            print("could not parse link")
+            songData = nil
         }
+        
+        return songData
     }
     
     /**
      Sets the json parameter of a Song object to the JSON data gathered from the song.link API
-     - Parameter completion: Closure takes JSONData structure and assigns it to the parsed JSON data
      */
-    func setJSONData(completion: @escaping (JSONData) -> Void) {
-        getData(link: link) { data in
-            DispatchQueue.main.async {
-                if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
-                    self.json = json
-                    completion(json)
-                }
+    func setJSONData() async throws {
+        if let data = try await getData(link: link) {
+            if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
+                self.json = json
+                print("assigned json data")
+            } else {
+                print("could not assign json data")
             }
         }
     }
