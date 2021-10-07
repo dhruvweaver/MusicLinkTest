@@ -66,6 +66,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func clearInputButtonPressed(_ sender: Any) {
         inputTextField.text = ""
+        song.dataIsSet = false
     }
     
     @IBAction func translateButtonPressed(_ sender: Any) {
