@@ -80,9 +80,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         dismissKeyboard()
         print(song.dataIsSet)
         if let input = inputTextField.text {
-            song.link = input
+            song.linkIn = input
         } else {
-            song.link = ""
+            song.linkIn = ""
         }
         
         loadingIndicator.startAnimating()

@@ -8,7 +8,7 @@
 import Foundation
 
 class Song {
-    var link: String
+    var linkIn: String
     var json: JSONData? = nil
     var dataIsSet: Bool = false
     
@@ -50,7 +50,7 @@ class Song {
     }
     
     init(link: String) {
-        self.link = link
+        self.linkIn = link
     }
     
     enum Platform: String {
@@ -73,7 +73,7 @@ class Song {
     }
     
     private func setJSONData() async throws {
-        if let data = try await getData(link: link) {
+        if let data = try await getData(link: linkIn) {
             if let json = try? JSONDecoder().decode(JSONData.self, from: data) {
                 print("assigned json data")
                 print(json.linksByPlatform.spotify.url)
